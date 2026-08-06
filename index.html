@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rancho Viejo — Elegí tu sucursal</title>
+  <style>
+    :root {
+      --brown:      #5a3a1a;
+      --brown-mid:  #7a5230;
+      --brown-light:#b08050;
+      --cream:      #f5efe6;
+      --text:       #3a2810;
+      --white:      #ffffff;
+      --overlay:    rgba(20,10,3,0.55);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: #1a0f05;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .top {
+      position: relative;
+      min-height: 22vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: url('../fondo.png');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      padding: 26px 20px 22px;
+    }
+    .top::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--overlay);
+    }
+    .top-content { position: relative; z-index: 1; }
+    .top-content img {
+      width: 190px;
+      max-width: 55vw;
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
+      mix-blend-mode: screen;
+    }
+    .top-content h1 {
+      color: var(--white);
+      font-size: clamp(1rem, 2.6vw, 1.4rem);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: normal;
+      margin-bottom: 6px;
+    }
+    .top-content p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      font-style: italic;
+      text-transform: uppercase;
+    }
+
+    .badge-test {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 2;
+      background: rgba(255,200,60,0.92);
+      color: #3a2810;
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-family: Georgia, serif;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    /* ── SEDES ── */
+    .sedes {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 44px 20px 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .sede-card {
+      position: relative;
+      display: block;
+      height: 380px;
+      border-radius: 6px;
+      overflow: hidden;
+      text-decoration: none;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .sede-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(0,0,0,0.55); }
+    .sede-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .sede-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,5,0,0.88) 10%, rgba(10,5,0,0.15) 60%);
+    }
+    .sede-card-info {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      z-index: 1;
+      padding: 26px 22px;
+      text-align: center;
+    }
+    .sede-card-label {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+    .sede-card-name {
+      color: var(--white);
+      font-size: clamp(1.3rem, 3vw, 1.7rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .sede-card-address {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+    }
+    .sede-card-cta {
+      display: inline-block;
+      padding: 10px 26px;
+      border: 1.5px solid rgba(255,255,255,0.75);
+      color: var(--white);
+      font-size: 0.72rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      border-radius: 30px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sede-card:hover .sede-card-cta { background: var(--white); color: var(--brown); }
+
+    /* ── FÁBRICA DE PASTAS (mismo diseño que las sedes) ── */
+    .pastas-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 8px 20px 60px;
+      display: flex;
+      justify-content: center;
+    }
+    .pastas-wrap .sede-card {
+      width: 100%;
+      max-width: 360px;
+    }
+
+    @media (max-width: 720px) {
+      .sedes { grid-template-columns: 1fr; padding: 34px 16px 6px; }
+      .sede-card { height: 300px; }
+      .pastas-wrap { padding: 8px 16px 46px; }
+      .pastas-wrap .sede-card { max-width: 420px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="top">
+    <span class="badge-test">Versión de prueba</span>
+    <div class="top-content">
+      <img src="../logo.png" alt="Rancho Viejo" />
+      <h1>Elegí tu sucursal</h1>
+      <p>Dos lugares, la misma calidad Rancho Viejo</p>
+    </div>
+  </section>
+
+  <div class="sedes">
+    <a class="sede-card" href="zona-sur/index.html">
+      <img src="zona-sur/portada.jpg" alt="Rancho Viejo Zona Sur" />
+      <div class="sede-card-info">
+        <div class="sede-card-label">Rancho Viejo</div>
+        <div class="sede-card-name">Zona Sur</div>
+        <div class="sede-card-address">📍 Av. Rogelio Nores Martínez 1900</div>
+        <span class="sede-card-cta">Ver carta y reservar</span>
+      </div>
+    </a>
+
+    <a class="sede-card" href="zona-norte/index.html">
+      <img src="zona-norte/portada.jpg" alt="Rancho Viejo Zona Norte" />
+      <div class="sede-card-info">
+        <div class="sede-card-label">Rancho Viejo</div>
+        <div class="sede-card-name">Zona Norte</div>
+        <div class="sede-card-address">📍 Av. Nepper 5788</div>
+        <span class="sede-card-cta">Ver carta y reservar</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="pastas-wrap">
+    <a class="sede-card" href="https://www.instagram.com/pastas.ranchoviejo/" target="_blank" rel="noopener">
+      <img src="../pastas.jpg" alt="Fábrica de Pastas Rancho Viejo" />
+      <div class="sede-card-info">
+        <div class="sede-card-label">Conocé también nuestra</div>
+        <div class="sede-card-name">Fábrica de Pastas</div>
+        <div class="sede-card-address">📍 Av. Gauss 5488, Local 5</div>
+        <span class="sede-card-cta">Ver precios + info</span>
+      </div>
+    </a>
+  </div>
+
+</body>
+</html>
